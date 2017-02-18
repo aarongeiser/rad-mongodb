@@ -1,0 +1,4 @@
+web:
+  image: frog/rad-mongodb
+  ports:
+    - "27017:27017"
