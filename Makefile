@@ -1,6 +1,6 @@
 include make_env
 
-.PHONY: build push shell run start stop rm release init
+.PHONY: build push shell run start restart stop rm release init
 
 build:
 	docker build --no-cache=true -t $(DOCKER_NAMESPACE)/$(DOCKER_REPOSITORY):$(DOCKER_IMAGE_VERSION) .
@@ -16,6 +16,9 @@ run:
 
 start:
 	docker run -d --name $(DOCKER_CONTAINER_NAME)-$(DOCKER_INSTANCE) $(DOCKER_PORTS) $(DOCKER_MAPPED_VOLUMES) $(DOCKER_ENV) $(DOCKER_NAMESPACE)/$(DOCKER_REPOSITORY):$(DOCKER_IMAGE_VERSION)
+
+restart:
+	docker start $(DOCKER_CONTAINER_NAME)-$(DOCKER_INSTANCE)
 
 stop:
 	docker stop $(DOCKER_CONTAINER_NAME)-$(DOCKER_INSTANCE)
